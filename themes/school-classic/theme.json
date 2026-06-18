@@ -1,0 +1,14 @@
+{
+    "name": "School Classic",
+    "version": "1.0.0",
+    "author": "",
+    "sections": [
+        "hero",
+        "announcement",
+        "news",
+        "gallery",
+        "ppdb",
+        "contact",
+        "cta"
+    ]
+}

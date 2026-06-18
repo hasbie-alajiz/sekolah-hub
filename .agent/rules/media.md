@@ -88,3 +88,9 @@ Hard delete hanya jika:
 Tidak boleh akses file langsung dari modul lain.
 
 Wajib melalui Media Service.
+
+---
+
+## Pengecualian
+
+Pengecualian: Dokumen PPDB (private) dikecualikan dari Media Module. Upload dokumen PPDB dilakukan langsung oleh PPDB Module ke storage/app/private/. Path disimpan di tabel registration_documents.
