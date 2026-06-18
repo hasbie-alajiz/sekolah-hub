@@ -96,6 +96,20 @@ ikuti urutan di atas.
 
 ---
 
+## Architecture Change Policy
+
+Agent tidak boleh:
+
+- Mengubah struktur app/Modules.
+- Menambah modul baru.
+- Mengubah dependency flow.
+- Mengubah pola Controller → Action → Service → Contract → Model.
+- Menambah layer arsitektur baru.
+
+Tanpa persetujuan eksplisit.
+
+---
+
 ## Code Generation Philosophy
 
 Utamakan:
@@ -110,6 +124,43 @@ Hindari:
 - Overengineering.
 - Enterprise pattern yang tidak diperlukan.
 - Dependency baru tanpa justifikasi.
+
+---
+
+## Minimal Change Principle
+
+Saat menyelesaikan task:
+
+- Ubah sesedikit mungkin.
+- Jangan memindahkan file tanpa alasan.
+- Jangan mengganti style code yang tidak terkait.
+- Jangan melakukan cleanup besar yang tidak diminta.
+
+Prioritaskan risiko regresi serendah mungkin.
+
+---
+
+## Rule Loading Strategy
+
+Jangan membaca seluruh .agent/rules sekaligus.
+
+Urutan:
+
+1. conventions.md
+2. architecture.md
+3. database.md
+4. agent-behavior.md
+
+Kemudian load hanya rules modul yang relevan:
+
+- cms.md
+- media.md
+- gallery.md
+- contact.md
+- theme.md
+- ppdb.md
+
+sesuai task yang sedang dikerjakan.
 
 ---
 

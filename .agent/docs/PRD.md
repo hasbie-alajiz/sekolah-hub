@@ -469,6 +469,16 @@ Produk dianggap berhasil apabila:
 
 ---
 
+## Tenant Model
+
+Sekolah Hub menggunakan arsitektur single-tenant.
+
+Satu instalasi aplikasi hanya digunakan oleh satu sekolah.
+
+Tidak mendukung multi-tenant pada V1.
+
+---
+
 # 15. Status V1
 
 Final.

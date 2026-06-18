@@ -147,7 +147,67 @@ Jangan membuat asumsi diam-diam.
 
 ---
 
+## Architecture Change Policy
+
+Agent tidak boleh:
+
+- Mengubah struktur folder modular yang telah disepakati.
+- Menambah layer arsitektur baru.
+- Mengganti pola Controller → Action → Service → Contract → Model.
+- Memindahkan domain ke modul baru.
+
+kecuali terdapat instruksi eksplisit dari pengguna.
+
+Jika perubahan mempengaruhi:
+
+- struktur modul,
+- dependency flow,
+- database boundary,
+- deployment architecture,
+
+agent wajib meminta persetujuan terlebih dahulu.
+
+---
+
+## Scope Guard
+
+Agent tidak boleh membuat:
+
+- fitur roadmap masa depan,
+- fitur yang "mungkin dibutuhkan nanti",
+- extensibility yang belum diperlukan,
+- abstraction untuk use case yang belum ada.
+
+Implementasikan hanya kebutuhan yang telah tercantum pada PRD V1.
+
+---
+
+## Change Strategy
+
+Gunakan Minimal Change Principle.
+
+Saat mengubah kode:
+
+- lakukan perubahan sekecil mungkin,
+- hindari refactor yang tidak diminta,
+- jangan mengubah style code yang tidak terkait task,
+- jangan memindahkan file tanpa alasan yang jelas.
+
+Tujuan utama adalah menyelesaikan task dengan risiko regresi minimum.
+
+---
+
 ## Additional Rules
 
 - Agent must not load all rules at once.
 - Agent must load rules incrementally based on task context.
+
+---
+
+Interpretasi Source of Truth:
+
+- PRD menjelaskan apa yang dibangun.
+- ERD menjelaskan bagaimana data disimpan.
+- ADR menjelaskan mengapa keputusan arsitektur diambil.
+- GEMINI.md menjelaskan bagaimana agent bekerja.
+- .agent/rules menjelaskan aturan implementasi rinci.
