@@ -53,8 +53,9 @@ Target pengguna akhir adalah admin sekolah non-teknis, bukan developer.
 ├── theme.md
 ├── storage.md
 ├── security.md
-├── testing.md (belum ada)
+├── testing.md (bplaceholder)
 └── agent-behavior.md
+└── frontend.md
 
 ---
 
