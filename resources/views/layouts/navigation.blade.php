@@ -15,6 +15,35 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @can('cms.manage')
+                        <x-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
+                            {{ __('Berita') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.pages.index')" :active="request()->routeIs('admin.pages.*')">
+                            {{ __('Halaman') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
+                            {{ __('Kategori') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.menus.index')" :active="request()->routeIs('admin.menus.*')">
+                            {{ __('Menu') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('users.manage')
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                            {{ __('Pengguna') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('audit_logs.view')
+                        <x-nav-link :href="route('admin.audit-logs.index')" :active="request()->routeIs('admin.audit-logs.*')">
+                            {{ __('Audit Log') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('settings.manage')
+                        <x-nav-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.*')">
+                            {{ __('Pengaturan') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

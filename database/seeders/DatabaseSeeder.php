@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(\App\Modules\System\database\seeders\SystemSeeder::class);
+        $this->call(\App\Modules\CMS\database\seeders\CMSSeeder::class);
     }
 }
