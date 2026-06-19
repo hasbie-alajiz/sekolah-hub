@@ -49,7 +49,9 @@
 
                         <div class="form-control w-full">
                             <label class="label font-medium text-gray-700">Isi Halaman</label>
-                            <textarea id="page-content" name="content" class="hidden">{{ old('content', $page->content) }}</textarea>
+                            <div class="prose max-w-none">
+                                <x-rich-text::trix id="page-content" name="content" :value="old('content', $page->content?->toTrixHtml())" />
+                            </div>
                             @error('content')
                                 <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                             @enderror
@@ -181,25 +183,5 @@
         </dialog>
     </div>
 
-    <!-- Self-hosted TinyMCE -->
-    <script src="/vendor/tinymce/tinymce.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            tinymce.init({
-                selector: '#page-content',
-                height: 400,
-                menubar: false,
-                branding: false,
-                promotion: false,
-                skin: 'oxide',
-                plugins: 'lists link code table help wordcount',
-                toolbar: 'undo redo | blocks | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code help',
-                setup: function (editor) {
-                    editor.on('change', function () {
-                        editor.save();
-                    });
-                }
-            });
-        });
-    </script>
+
 </x-app-layout>

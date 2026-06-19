@@ -7,10 +7,12 @@ namespace App\Modules\PPDB\Support;
 use App\Modules\PPDB\Models\AdmissionTrack;
 use App\Modules\PPDB\Models\AdmissionFormField;
 use App\Modules\PPDB\Models\Registration;
-use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class RegistrationsExport implements FromArray, WithHeadings
+class RegistrationsExport implements FromQuery, WithHeadings, WithMapping, WithChunkReading
 {
     protected AdmissionTrack $track;
     protected $fields;
@@ -24,6 +26,9 @@ class RegistrationsExport implements FromArray, WithHeadings
             ->get();
     }
 
+    /**
+     * Define headings.
+     */
     public function headings(): array
     {
         $headings = [
@@ -39,43 +44,56 @@ class RegistrationsExport implements FromArray, WithHeadings
         return $headings;
     }
 
-    public function array(): array
+    /**
+     * Query registrations to export.
+     */
+    public function query()
     {
-        $registrations = Registration::where('track_id', $this->track->id)
-            ->with(['values.field', 'documents.field'])
-            ->get();
+        return Registration::where('track_id', $this->track->id)
+            ->with(['values.field', 'documents.field']);
+    }
 
-        $rows = [];
+    /**
+     * Map each registration record to output row.
+     *
+     * @param mixed $registration
+     * @return array
+     */
+    public function map($registration): array
+    {
+        $row = [
+            $registration->registration_number,
+            $registration->status,
+            $registration->submitted_at ? $registration->submitted_at->format('Y-m-d H:i:s') : '-',
+        ];
 
-        foreach ($registrations as $registration) {
-            $row = [
-                $registration->registration_number,
-                $registration->status,
-                $registration->submitted_at ? $registration->submitted_at->format('Y-m-d H:i:s') : '-',
-            ];
-
-            foreach ($this->fields as $field) {
-                if ($field->type === 'file') {
-                    $doc = $registration->documents->firstWhere('field_id', $field->id);
-                    $row[] = $doc ? $doc->original_name : '-';
-                } else {
-                    $valModel = $registration->values->firstWhere('field_id', $field->id);
-                    if ($valModel) {
-                        $val = $valModel->real_value;
-                        if (is_array($val)) {
-                            $row[] = implode(', ', $val);
-                        } else {
-                            $row[] = is_bool($val) ? ($val ? 'Ya' : 'Tidak') : strval($val);
-                        }
+        foreach ($this->fields as $field) {
+            if ($field->type === 'file') {
+                $doc = $registration->documents->firstWhere('field_id', $field->id);
+                $row[] = $doc ? $doc->original_name : '-';
+            } else {
+                $valModel = $registration->values->firstWhere('field_id', $field->id);
+                if ($valModel) {
+                    $val = $valModel->real_value;
+                    if (is_array($val)) {
+                        $row[] = implode(', ', $val);
                     } else {
-                        $row[] = '-';
+                        $row[] = is_bool($val) ? ($val ? 'Ya' : 'Tidak') : strval($val);
                     }
+                } else {
+                    $row[] = '-';
                 }
             }
-
-            $rows[] = $row;
         }
 
-        return $rows;
+        return $row;
+    }
+
+    /**
+     * Define chunk size for streaming.
+     */
+    public function chunkSize(): int
+    {
+        return 200;
     }
 }

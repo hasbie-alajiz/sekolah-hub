@@ -365,4 +365,40 @@ class CMSTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($category->name);
     }
+
+    /**
+     * Test HTML sanitization.
+     */
+    public function test_html_content_is_sanitized(): void
+    {
+        $this->actingAs($this->superAdmin);
+
+        $category = Category::first();
+
+        // 1. Create Post with XSS payload and Trix custom element
+        $postData = [
+            'title' => 'Post Sanitasi Tes',
+            'slug' => 'post-sanitasi-tes',
+            'excerpt' => 'Tes XSS.',
+            'content' => '<script>alert("XSS")</script><p>Konten aman <strong>tebal</strong>.</p><figure data-trix-attachment="test-data" class="attachment"><figcaption class="caption">Foto</figcaption></figure>',
+            'status' => 'published',
+            'categories' => [$category->id],
+        ];
+
+        $response = $this->post(route('admin.posts.store'), $postData);
+        $response->assertRedirect(route('admin.posts.index'));
+
+        // Retrieve saved post
+        $post = Post::where('slug', 'post-sanitasi-tes')->first();
+        $this->assertNotNull($post);
+
+        // Assert XSS script is stripped
+        $this->assertStringNotContainsString('<script>', $post->content->toTrixHtml());
+        $this->assertStringNotContainsString('alert("XSS")', $post->content->toTrixHtml());
+
+        // Assert safe HTML elements and custom Trix elements are preserved
+        $this->assertStringContainsString('Konten aman <strong>tebal</strong>.', $post->content->toTrixHtml());
+        $this->assertStringContainsString('<figure data-trix-attachment="test-data" class="attachment">', $post->content->toTrixHtml());
+        $this->assertStringContainsString('<figcaption class="caption">Foto</figcaption>', $post->content->toTrixHtml());
+    }
 }

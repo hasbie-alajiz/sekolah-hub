@@ -121,4 +121,28 @@ class MediaController extends Controller
 
         return redirect()->back()->with('success', 'Folder deleted successfully.');
     }
+
+    /**
+     * Handle AJAX file upload from rich text editor (Trix).
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function richtextUpload(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'file' => 'required|file|image|max:10240', // Limit to 10MB
+        ]);
+
+        try {
+            $media = $this->mediaService->upload($request->file('file'));
+            $url = $this->mediaService->getUrl($media->id);
+            return response()->json([
+                'image_url' => $url,
+                'media_id' => $media->id,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+    }
 }

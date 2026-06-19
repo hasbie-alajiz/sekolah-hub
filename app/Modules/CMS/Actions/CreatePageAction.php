@@ -33,7 +33,7 @@ class CreatePageAction
                 'parent_id' => !empty($data['parent_id']) ? (int) $data['parent_id'] : null,
                 'title' => $data['title'],
                 'slug' => $slug,
-                'content' => $data['content'],
+                'content' => \App\Modules\System\Support\HtmlSanitizer::clean($data['content']),
                 'featured_media_id' => !empty($data['featured_media_id']) ? (int) $data['featured_media_id'] : null,
                 'status' => $data['status'] ?? 'draft',
                 'seo_title' => $data['seo_title'] ?? null,

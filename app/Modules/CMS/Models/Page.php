@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class Page extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasRichText;
 
     protected $table = 'pages';
+
+    protected $richTextAttributes = [
+        'content' => ['attribute' => true],
+    ];
 
     protected $fillable = [
         'parent_id',

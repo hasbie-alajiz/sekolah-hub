@@ -9,12 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class Post extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasRichText;
 
     protected $table = 'posts';
+
+    protected $richTextAttributes = [
+        'content' => ['attribute' => true],
+    ];
 
     protected $fillable = [
         'title',

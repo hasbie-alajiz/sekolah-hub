@@ -33,7 +33,7 @@ class CreatePostAction
                 'title' => $data['title'],
                 'slug' => $slug,
                 'excerpt' => $data['excerpt'] ?? null,
-                'content' => $data['content'],
+                'content' => \App\Modules\System\Support\HtmlSanitizer::clean($data['content']),
                 'featured_media_id' => !empty($data['featured_media_id']) ? (int) $data['featured_media_id'] : null,
                 'status' => $data['status'] ?? 'draft',
                 'published_at' => ($data['status'] ?? 'draft') === 'published' ? now() : null,
