@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,26 +33,26 @@
                 [x-cloak] { display: none !important; }
             </style>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center w-full justify-between">
-                        <!-- Logo / Brand -->
-                        <div class="shrink-0 flex items-center">
-                            <a href="/" class="font-bold text-xl text-primary flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                <span>{{ config('app.name', 'Sekolah Hub') }}</span>
-                            </a>
-                        </div>
+                <div class="flex justify-between h-16 md:h-20 items-center">
+                    <!-- Logo / Brand (Left) -->
+                    <div class="shrink-0 flex items-center">
+                        <a href="/" class="font-bold text-xl text-primary flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                            <span>{{ config('app.name', 'Sekolah Hub') }}</span>
+                        </a>
+                    </div>
 
-                        <!-- Menu Items (Desktop) -->
-                        <nav class="hidden md:flex space-x-1 items-center">
+                    <!-- Nav & CTA Group (Right - Desktop) -->
+                    <div class="hidden md:flex items-center gap-8">
+                        <nav class="flex space-x-2 items-center">
                             @if($headerMenu && $headerMenu->items)
                                 @foreach($headerMenu->items as $item)
                                     @if($item->children && $item->children->isNotEmpty())
                                         <!-- Dropdown Menu Item -->
                                         <div class="dropdown dropdown-hover dropdown-end">
-                                            <div tabindex="0" role="button" class="btn btn-ghost btn-sm text-gray-600 hover:text-primary font-medium flex items-center">
+                                            <div tabindex="0" role="button" class="px-4 py-2 text-[15px] font-semibold text-gray-600 hover:text-primary transition-colors flex items-center cursor-pointer">
                                                 {{ $item->title }}
                                                 <svg class="fill-current h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -69,28 +69,31 @@
                                             </ul>
                                         </div>
                                     @else
-                                        <a href="{{ $item->url }}" target="{{ $item->target }}" class="btn btn-ghost btn-sm text-gray-600 hover:text-primary font-medium">
+                                        <a href="{{ $item->url }}" target="{{ $item->target }}" class="px-4 py-2 text-[15px] font-semibold text-gray-600 hover:text-primary transition-colors">
                                             {{ $item->title }}
                                         </a>
                                     @endif
                                 @endforeach
                             @else
-                                <a href="/" class="btn btn-ghost btn-sm text-gray-600 hover:text-primary font-medium">Beranda</a>
+                                <a href="/" class="px-4 py-2 text-[15px] font-semibold text-gray-600 hover:text-primary transition-colors">Beranda</a>
+                                <a href="/kontak" class="px-4 py-2 text-[15px] font-semibold text-gray-600 hover:text-primary transition-colors">Hubungi Kami</a>
                             @endif
                         </nav>
+                        
+                        <!-- CTA Button -->
+                        <a href="/ppdb" class="btn btn-primary text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+                            Daftar PPDB
+                        </a>
+                    </div>
 
-                        <!-- Actions & Hamburger (Mobile / Desktop Split) -->
-                        <div class="flex items-center gap-2">
-                            <!-- Hamburger Button (Mobile Only) -->
-                            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition focus:outline-none" aria-label="Toggle menu">
-                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <!-- Hamburger Icon -->
-                                    <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                    <!-- Close Icon -->
-                                    <path x-show="mobileMenuOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
+                    <!-- Mobile Hamburger Button (Right - Mobile Only) -->
+                    <div class="flex md:hidden items-center">
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition focus:outline-none" aria-label="Toggle menu">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                <path x-show="mobileMenuOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -153,15 +156,16 @@
                 </div>
 
                 <!-- Footer Links -->
-                <nav class="flex flex-wrap gap-4 justify-center">
+                <nav class="flex flex-wrap gap-6 justify-center">
                     @if($footerMenu && $footerMenu->items)
                         @foreach($footerMenu->items as $item)
-                            <a href="{{ $item->url }}" target="{{ $item->target }}" class="text-sm text-gray-500 hover:text-primary">
+                            <a href="{{ $item->url }}" target="{{ $item->target }}" class="text-sm text-gray-500 hover:text-primary transition-colors">
                                 {{ $item->title }}
                             </a>
                         @endforeach
                     @else
-                        <span class="text-xs text-gray-400">Website sekolah berbasis Laravel</span>
+                        <a href="/" class="text-sm text-gray-500 hover:text-primary transition-colors">Beranda</a>
+                        <a href="/kontak" class="text-sm text-gray-500 hover:text-primary transition-colors">Hubungi Kami</a>
                     @endif
                 </nav>
             </div>

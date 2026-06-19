@@ -11,6 +11,7 @@
     --primary: #3B82F6;
     --border: #E9ECEF;
     --radius: 0.75rem;
+    --color-base-100: #ffffff;
 }
 
 html {
@@ -40,4 +41,52 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #94A3B8;
+}
+
+/* Override DaisyUI Default Buttons for Premium Haptic Feedback */
+.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #ffffff !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary) !important;
+    opacity: 0.92 !important;
+    border-color: var(--primary) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.15), 0 4px 6px -4px rgba(59, 130, 246, 0.15) !important;
+}
+
+.btn-primary:active {
+    transform: scale(0.97) !important;
+}
+
+.btn-neutral {
+    background-color: #1f2937 !important;
+    border-color: #1f2937 !important;
+    color: #ffffff !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.btn-neutral:hover {
+    background-color: #111827 !important;
+    border-color: #111827 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-neutral:active {
+    transform: scale(0.97) !important;
+}
+
+/* Override btn-ghost to avoid dark background box and cleanly transition color to primary */
+.btn-ghost {
+    transition: all 0.2s ease-in-out !important;
+}
+
+.btn-ghost:hover {
+    background-color: transparent !important;
+    color: var(--primary) !important;
 }
