@@ -23,23 +23,21 @@
                         <div class="grid grid-cols-1 gap-6 max-w-xl">
                             @foreach($settings as $setting)
                                 <div class="form-control w-full">
-                                    <label class="label font-semibold text-gray-700">
-                                        <span class="label-text">{{ $setting->description ?: $setting->key }}</span>
-                                    </label>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">{{ $setting->description ?: $setting->key }}</label>
                                     
                                     @if($setting->key === 'theme.active')
-                                        <select name="settings[{{ $setting->key }}]" class="select select-bordered w-full text-sm">
+                                        <select name="settings[{{ $setting->key }}]" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                             <option value="school-classic" {{ $setting->value === 'school-classic' ? 'selected' : '' }}>School Classic</option>
                                         </select>
                                     @elseif($setting->key === 'theme.primary_color')
                                         <div class="flex gap-3 items-center" x-data="{ color: '{{ $setting->value ?: '#3B82F6' }}' }">
                                             <input type="color" x-model="color" class="w-10 h-10 border border-gray-200 rounded-lg cursor-pointer shrink-0" />
-                                            <input type="text" name="settings[{{ $setting->key }}]" x-model="color" class="input input-bordered flex-1 text-sm font-mono" placeholder="#3B82F6" />
+                                            <input type="text" name="settings[{{ $setting->key }}]" x-model="color" class="input input-bordered flex-1 rounded-lg text-sm font-mono border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" placeholder="#3B82F6" />
                                         </div>
                                     @elseif($setting->key === 'cloudflare.turnstile.secret_key')
-                                        <input type="password" name="settings[{{ $setting->key }}]" value="{{ $setting->value }}" class="input input-bordered w-full text-sm" placeholder="Turnstile secret key">
+                                        <input type="password" name="settings[{{ $setting->key }}]" value="{{ $setting->value }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" placeholder="Turnstile secret key">
                                     @else
-                                        <input type="text" name="settings[{{ $setting->key }}]" value="{{ $setting->value }}" class="input input-bordered w-full text-sm">
+                                        <input type="text" name="settings[{{ $setting->key }}]" value="{{ $setting->value }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                     @endif
                                 </div>
                             @endforeach

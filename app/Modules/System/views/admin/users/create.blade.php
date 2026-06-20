@@ -27,24 +27,18 @@
                         @csrf
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Nama Lengkap</span>
-                            </label>
-                            <input type="text" name="name" value="{{ old('name') }}" class="input input-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nama Lengkap</label>
+                            <input type="text" name="name" value="{{ old('name') }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                         </div>
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Email</span>
-                            </label>
-                            <input type="email" name="email" value="{{ old('email') }}" class="input input-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Email</label>
+                            <input type="email" name="email" value="{{ old('email') }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                         </div>
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Role</span>
-                            </label>
-                            <select name="role" class="select select-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Role</label>
+                            <select name="role" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 <option value="">Pilih Role</option>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->name }}" {{ old('role') === $role->name ? 'selected' : '' }}>
@@ -55,17 +49,13 @@
                         </div>
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Password</span>
-                            </label>
-                            <input type="password" name="password" class="input input-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Password</label>
+                            <input type="password" name="password" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                         </div>
 
                         <div class="form-control w-full mb-6">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Konfirmasi Password</span>
-                            </label>
-                            <input type="password" name="password_confirmation" class="input input-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Konfirmasi Password</label>
+                            <input type="password" name="password_confirmation" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                         </div>
 
                         <div class="flex space-x-2">

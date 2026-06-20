@@ -28,24 +28,18 @@
                         @method('PUT')
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Nama Lengkap</span>
-                            </label>
-                            <input type="text" name="name" value="{{ old('name', $user->name) }}" class="input input-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nama Lengkap</label>
+                            <input type="text" name="name" value="{{ old('name', $user->name) }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                         </div>
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Email</span>
-                            </label>
-                            <input type="email" name="email" value="{{ old('email', $user->email) }}" class="input input-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Email</label>
+                            <input type="email" name="email" value="{{ old('email', $user->email) }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                         </div>
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-semibold text-gray-700">
-                                <span class="label-text">Role</span>
-                            </label>
-                            <select name="role" class="select select-bordered w-full" required>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Role</label>
+                            <select name="role" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 <option value="">Pilih Role</option>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->name }}" {{ old('role', $user->roles->first()?->name) === $role->name ? 'selected' : '' }}>
@@ -59,17 +53,13 @@
                             <p class="text-sm text-gray-400 mb-2">Kosongkan kolom sandi di bawah jika Anda tidak ingin merubah sandi pengguna.</p>
                             
                             <div class="form-control w-full mb-4">
-                                <label class="label font-semibold text-gray-700">
-                                    <span class="label-text">Password Baru (Opsional)</span>
-                                </label>
-                                <input type="password" name="password" class="input input-bordered w-full">
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Password Baru (Opsional)</label>
+                                <input type="password" name="password" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                             </div>
 
                             <div class="form-control w-full mb-6">
-                                <label class="label font-semibold text-gray-700">
-                                    <span class="label-text">Konfirmasi Password Baru</span>
-                                </label>
-                                <input type="password" name="password_confirmation" class="input input-bordered w-full">
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Konfirmasi Password Baru</label>
+                                <input type="password" name="password_confirmation" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                             </div>
                         </div>
 

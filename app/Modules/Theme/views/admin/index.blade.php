@@ -16,7 +16,7 @@
             @endif
 
             <!-- Tabs -->
-            <div class="tabs tabs-lifted mb-6">
+            <div class="tabs tabs-lifted mb-6 space-x-2">
                 <button @click="activeTab = 'themes'" :class="activeTab === 'themes' ? 'tab-active' : ''" class="tab font-semibold text-sm">Pilih Tema</button>
                 <button @click="activeTab = 'sections'" :class="activeTab === 'sections' ? 'tab-active' : ''" class="tab font-semibold text-sm">Susunan Beranda</button>
                 <button @click="activeTab = 'config'" :class="activeTab === 'config' ? 'tab-active' : ''" class="tab font-semibold text-sm">Konfigurasi Konten</button>
@@ -70,28 +70,7 @@
 
             <!-- Tab Content: Homepage Sections -->
             <div x-show="activeTab === 'sections'" class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-100 p-6"
-                 x-data="{
-                    sections: @json($allSections),
-                    activeSections: @json($activeSections),
-                    moveUp(index) {
-                        if (index > 0) {
-                            const arr = [...this.sections];
-                            const temp = arr[index];
-                            arr[index] = arr[index - 1];
-                            arr[index - 1] = temp;
-                            this.sections = arr;
-                        }
-                    },
-                    moveDown(index) {
-                        if (index < this.sections.length - 1) {
-                            const arr = [...this.sections];
-                            const temp = arr[index];
-                            arr[index] = arr[index + 1];
-                            arr[index + 1] = temp;
-                            this.sections = arr;
-                        }
-                    }
-                 }">
+                 x-data="homepageSections({{ json_encode($allSections) }}, {{ json_encode($activeSections) }})">
                 <div class="max-w-xl">
                     <p class="text-sm text-gray-500 mb-6">Atur urutan pemuatan section pada halaman depan dengan tombol panah (▲/▼). Centang checkbox untuk menampilkan section di halaman depan.</p>
                     
@@ -131,26 +110,26 @@
                         <h3 class="text-md font-bold text-gray-900 uppercase tracking-wider">1. Konfigurasi Bagian Hero</h3>
                         <div class="grid grid-cols-1 gap-4">
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Judul Utama (Hero Title)</span></label>
-                                <input type="text" name="settings[hero_title]" value="{{ $themeSettings['hero_title'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Judul Utama (Hero Title)</label>
+                                <input type="text" name="settings[hero_title]" value="{{ $themeSettings['hero_title'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                             </div>
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Sub-Judul / Deskripsi (Hero Subtitle)</span></label>
-                                <textarea name="settings[hero_subtitle]" class="textarea textarea-bordered w-full text-sm rounded-lg min-h-[60px]" required>{{ $themeSettings['hero_subtitle'] ?? '' }}</textarea>
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Sub-Judul / Deskripsi (Hero Subtitle)</label>
+                                <textarea name="settings[hero_subtitle]" class="textarea textarea-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 min-h-[60px]" required>{{ $themeSettings['hero_subtitle'] ?? '' }}</textarea>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Label Tombol Aksi (CTA Button)</span></label>
-                                    <input type="text" name="settings[hero_cta_text]" value="{{ $themeSettings['hero_cta_text'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg">
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Label Tombol Aksi (CTA Button)</label>
+                                    <input type="text" name="settings[hero_cta_text]" value="{{ $themeSettings['hero_cta_text'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                 </div>
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Link Tombol Aksi</span></label>
-                                    <input type="text" name="settings[hero_cta_url]" value="{{ $themeSettings['hero_cta_url'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg">
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Link Tombol Aksi</label>
+                                    <input type="text" name="settings[hero_cta_url]" value="{{ $themeSettings['hero_cta_url'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                 </div>
                             </div>
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Pilih Gambar Latar Belakang (Hero Background)</span></label>
-                                <select name="settings[hero_bg_media_id]" class="select select-bordered w-full text-sm rounded-lg">
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Pilih Gambar Latar Belakang (Hero Background)</label>
+                                <select name="settings[hero_bg_media_id]" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                     <option value="">-- Gunakan Latar Belakang Default --</option>
                                     @foreach($mediaList as $media)
                                         <option value="{{ $media->id }}" {{ (isset($themeSettings['hero_bg_media_id']) && (int)$themeSettings['hero_bg_media_id'] === $media->id) ? 'selected' : '' }}>
@@ -167,26 +146,26 @@
                         <h3 class="text-md font-bold text-gray-900 uppercase tracking-wider">2. Sambutan Kepala Sekolah</h3>
                         <div class="grid grid-cols-1 gap-4">
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Judul Bagian Sambutan</span></label>
-                                <input type="text" name="settings[announcement_title]" value="{{ $themeSettings['announcement_title'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Judul Bagian Sambutan</label>
+                                <input type="text" name="settings[announcement_title]" value="{{ $themeSettings['announcement_title'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                             </div>
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Isi Teks Sambutan</span></label>
-                                <textarea name="settings[announcement_content]" class="textarea textarea-bordered w-full text-sm rounded-lg min-h-[100px]" required>{{ $themeSettings['announcement_content'] ?? '' }}</textarea>
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Isi Teks Sambutan</label>
+                                <textarea name="settings[announcement_content]" class="textarea textarea-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 min-h-[100px]" required>{{ $themeSettings['announcement_content'] ?? '' }}</textarea>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Nama Kepala Sekolah</span></label>
-                                    <input type="text" name="settings[announcement_author]" value="{{ $themeSettings['announcement_author'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nama Kepala Sekolah</label>
+                                    <input type="text" name="settings[announcement_author]" value="{{ $themeSettings['announcement_author'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 </div>
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Jabatan / Peran</span></label>
-                                    <input type="text" name="settings[announcement_author_role]" value="{{ $themeSettings['announcement_author_role'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Jabatan / Peran</label>
+                                    <input type="text" name="settings[announcement_author_role]" value="{{ $themeSettings['announcement_author_role'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 </div>
                             </div>
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Pilih Foto Kepala Sekolah</span></label>
-                                <select name="settings[announcement_image_media_id]" class="select select-bordered w-full text-sm rounded-lg">
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Pilih Foto Kepala Sekolah</label>
+                                <select name="settings[announcement_image_media_id]" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                     <option value="">-- Gunakan Foto Default --</option>
                                     @foreach($mediaList as $media)
                                         <option value="{{ $media->id }}" {{ (isset($themeSettings['announcement_image_media_id']) && (int)$themeSettings['announcement_image_media_id'] === $media->id) ? 'selected' : '' }}>
@@ -203,17 +182,17 @@
                         <h3 class="text-md font-bold text-gray-900 uppercase tracking-wider">3. Banner Ajakan (CTA Banner)</h3>
                         <div class="grid grid-cols-1 gap-4">
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Judul Banner</span></label>
-                                <input type="text" name="settings[cta_title]" value="{{ $themeSettings['cta_title'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Judul Banner</label>
+                                <input type="text" name="settings[cta_title]" value="{{ $themeSettings['cta_title'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Label Tombol Banner</span></label>
-                                    <input type="text" name="settings[cta_button_text]" value="{{ $themeSettings['cta_button_text'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Label Tombol Banner</label>
+                                    <input type="text" name="settings[cta_button_text]" value="{{ $themeSettings['cta_button_text'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 </div>
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Link Tujuan Tombol</span></label>
-                                    <input type="text" name="settings[cta_button_url]" value="{{ $themeSettings['cta_button_url'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Link Tujuan Tombol</label>
+                                    <input type="text" name="settings[cta_button_url]" value="{{ $themeSettings['cta_button_url'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 </div>
                             </div>
                         </div>
@@ -225,33 +204,31 @@
                         <div class="grid grid-cols-1 gap-4">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Judul Bagian Kontak</span></label>
-                                    <input type="text" name="settings[contact_title]" value="{{ $themeSettings['contact_title'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Judul Bagian Kontak</label>
+                                    <input type="text" name="settings[contact_title]" value="{{ $themeSettings['contact_title'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 </div>
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Deskripsi Singkat</span></label>
-                                    <input type="text" name="settings[contact_subtitle]" value="{{ $themeSettings['contact_subtitle'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg">
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Deskripsi Singkat</label>
+                                    <input type="text" name="settings[contact_subtitle]" value="{{ $themeSettings['contact_subtitle'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                 </div>
                             </div>
                             <div class="form-control w-full">
-                                <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Alamat Resmi Sekolah</span></label>
-                                <input type="text" name="settings[contact_address]" value="{{ $themeSettings['contact_address'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Alamat Resmi Sekolah</label>
+                                <input type="text" name="settings[contact_address]" value="{{ $themeSettings['contact_address'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Nomor Telepon</span></label>
-                                    <input type="text" name="settings[contact_phone]" value="{{ $themeSettings['contact_phone'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nomor Telepon</label>
+                                    <input type="text" name="settings[contact_phone]" value="{{ $themeSettings['contact_phone'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 </div>
                                 <div class="form-control w-full">
-                                    <label class="label"><span class="label-text font-semibold text-gray-700 text-xs">Email Resmi</span></label>
-                                    <input type="email" name="settings[contact_email]" value="{{ $themeSettings['contact_email'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Email Resmi</label>
+                                    <input type="email" name="settings[contact_email]" value="{{ $themeSettings['contact_email'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                 </div>
                             </div>
                             <div class="form-control w-full">
-                                <label class="label">
-                                    <span class="label-text font-semibold text-gray-700 text-xs">Google Maps Embed URL</span>
-                                </label>
-                                <input type="text" name="settings[contact_maps_embed]" value="{{ $themeSettings['contact_maps_embed'] ?? '' }}" class="input input-bordered w-full text-sm rounded-lg" placeholder="https://www.google.com/maps/embed?pb=...">
+                                <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Google Maps Embed URL</label>
+                                <input type="text" name="settings[contact_maps_embed]" value="{{ $themeSettings['contact_maps_embed'] ?? '' }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" placeholder="https://www.google.com/maps/embed?pb=...">
                                 <span class="text-[10px] text-gray-400 mt-1">Salin alamat URL yang ada di dalam tag src `<iframe>` dari Google Maps Share Option.</span>
                             </div>
                         </div>
@@ -267,4 +244,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('homepageSections', (initialSections, initialActive) => ({
+                sections: initialSections,
+                activeSections: initialActive,
+                moveUp(index) {
+                    if (index > 0) {
+                        const arr = [...this.sections];
+                        const temp = arr[index];
+                        arr[index] = arr[index - 1];
+                        arr[index - 1] = temp;
+                        this.sections = arr;
+                    }
+                },
+                moveDown(index) {
+                    if (index < this.sections.length - 1) {
+                        const arr = [...this.sections];
+                        const temp = arr[index];
+                        arr[index] = arr[index + 1];
+                        arr[index + 1] = temp;
+                        this.sections = arr;
+                    }
+                }
+            }));
+        });
+    </script>
 </x-app-layout>

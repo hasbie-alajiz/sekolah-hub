@@ -1,3 +1,11 @@
+@php
+    try {
+        $systemService = app(\App\Modules\System\Contracts\SystemServiceInterface::class);
+        $primaryColor = $systemService->getSetting('theme.primary_color', '#3B82F6');
+    } catch (\Exception $e) {
+        $primaryColor = '#3B82F6';
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
     <head>
@@ -13,6 +21,12 @@
 
         <!-- Scripts & Styling -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            :root {
+                --primary: {{ $primaryColor }};
+            }
+        </style>
     </head>
     <body class="font-sans antialiased text-gray-900 bg-gray-50/50 min-h-screen flex flex-col justify-between">
         @php

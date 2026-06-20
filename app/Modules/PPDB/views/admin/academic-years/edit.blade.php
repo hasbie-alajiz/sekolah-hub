@@ -19,50 +19,50 @@
 
                     <div class="space-y-4">
                         <div class="form-control w-full">
-                            <label class="label font-medium text-gray-700 text-sm">Nama Tahun Ajaran <span class="text-rose-500">*</span></label>
-                            <input type="text" name="name" value="{{ old('name', $academicYear->name) }}" placeholder="Contoh: Tahun Ajaran 2026/2027" class="input input-bordered w-full @error('name') input-error @enderror" required />
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nama Tahun Ajaran <span class="text-rose-500">*</span></label>
+                            <input type="text" name="name" value="{{ old('name', $academicYear->name) }}" placeholder="Contoh: Tahun Ajaran 2026/2027" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('name') input-error @enderror" required />
                             @error('name')
                                 <span class="text-rose-600 text-xs mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-control w-full">
-                            <label class="label font-medium text-gray-700 text-sm">Kode <span class="text-rose-500">*</span></label>
-                            <input type="text" name="code" value="{{ old('code', $academicYear->code) }}" placeholder="Contoh: 2026/2027" class="input input-bordered w-full @error('code') input-error @enderror" required />
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Kode <span class="text-rose-500">*</span></label>
+                            <input type="text" name="code" value="{{ old('code', $academicYear->code) }}" placeholder="Contoh: 2026/2027" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('code') input-error @enderror" required />
                             @error('code')
                                 <span class="text-rose-600 text-xs mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-control w-full">
-                            <label class="label font-medium text-gray-700 text-sm">Tanggal & Waktu Pendaftaran Dibuka <span class="text-rose-500">*</span></label>
-                            <input type="datetime-local" name="registration_open_at" value="{{ old('registration_open_at', $academicYear->registration_open_at ? $academicYear->registration_open_at->format('Y-m-d\TH:i') : '') }}" class="input input-bordered w-full @error('registration_open_at') input-error @enderror" required />
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Tanggal & Waktu Pendaftaran Dibuka <span class="text-rose-500">*</span></label>
+                            <input type="datetime-local" name="registration_open_at" value="{{ old('registration_open_at', $academicYear->registration_open_at ? $academicYear->registration_open_at->format('Y-m-d\TH:i') : '') }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('registration_open_at') input-error @enderror" required />
                             @error('registration_open_at')
                                 <span class="text-rose-600 text-xs mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-control w-full">
-                            <label class="label font-medium text-gray-700 text-sm">Tanggal & Waktu Pendaftaran Ditutup <span class="text-rose-500">*</span></label>
-                            <input type="datetime-local" name="registration_close_at" value="{{ old('registration_close_at', $academicYear->registration_close_at ? $academicYear->registration_close_at->format('Y-m-d\TH:i') : '') }}" class="input input-bordered w-full @error('registration_close_at') input-error @enderror" required />
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Tanggal & Waktu Pendaftaran Ditutup <span class="text-rose-500">*</span></label>
+                            <input type="datetime-local" name="registration_close_at" value="{{ old('registration_close_at', $academicYear->registration_close_at ? $academicYear->registration_close_at->format('Y-m-d\TH:i') : '') }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('registration_close_at') input-error @enderror" required />
                             @error('registration_close_at')
                                 <span class="text-rose-600 text-xs mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-control w-full">
-                            <label class="label font-medium text-gray-700 text-sm">Tanggal & Waktu Pengumuman Kelulusan <span class="text-rose-500">*</span></label>
-                            <input type="datetime-local" name="announcement_at" value="{{ old('announcement_at', $academicYear->announcement_at ? $academicYear->announcement_at->format('Y-m-d\TH:i') : '') }}" class="input input-bordered w-full @error('announcement_at') input-error @enderror" required />
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Tanggal & Waktu Pengumuman Kelulusan <span class="text-rose-500">*</span></label>
+                            <input type="datetime-local" name="announcement_at" value="{{ old('announcement_at', $academicYear->announcement_at ? $academicYear->announcement_at->format('Y-m-d\TH:i') : '') }}" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('announcement_at') input-error @enderror" required />
                             @error('announcement_at')
                                 <span class="text-rose-600 text-xs mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-control mt-4">
-                            <label class="label cursor-pointer justify-start gap-3">
+                            <label class="flex items-center gap-3 cursor-pointer justify-start">
                                 <input type="hidden" name="is_active" value="0">
-                                <input type="checkbox" name="is_active" value="1" {{ old('is_active', $academicYear->is_active) ? 'checked' : '' }} class="checkbox checkbox-primary" />
-                                <span class="label-text font-medium text-gray-700 text-sm">Jadikan Tahun Ajaran Aktif</span>
+                                <input type="checkbox" name="is_active" value="1" {{ old('is_active', $academicYear->is_active) ? 'checked' : '' }} class="checkbox checkbox-primary checkbox-sm rounded" />
+                                <span class="text-sm text-gray-700 select-none font-semibold">Jadikan Tahun Ajaran Aktif</span>
                             </label>
                         </div>
                     </div>
