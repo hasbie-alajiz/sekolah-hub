@@ -114,8 +114,8 @@
                             @method('PUT')
 
                             <div class="form-control w-full">
-                                <label class="label text-xs font-semibold text-gray-500 py-0.5">Ubah Status Ke:</label>
-                                <select name="status" class="select select-bordered select-sm w-full mt-1">
+                                <label class="block text-gray-700 font-semibold mb-1 text-xs">Ubah Status Ke:</label>
+                                <select name="status" class="select select-bordered select-sm w-full mt-1 rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                     <option value="unread" {{ $contact->status === 'unread' ? 'selected' : '' }}>Belum Dibaca</option>
                                     <option value="read" {{ $contact->status === 'read' ? 'selected' : '' }}>Sudah Dibaca</option>
                                     <option value="replied" {{ $contact->status === 'replied' ? 'selected' : '' }}>Sudah Dibalas</option>
@@ -123,12 +123,12 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-sm w-full">Update Status</button>
+                            <button type="submit" class="btn btn-primary btn-sm w-full rounded-lg text-xs font-bold active:scale-[0.98]">Update Status</button>
                         </form>
 
                         <div class="border-t border-gray-100 my-4 pt-4">
                             <!-- Reply Button -->
-                            <a href="mailto:{{ $contact->email }}?subject=Re: {{ rawurlencode($contact->subject) }}" class="btn btn-outline btn-sm w-full flex items-center justify-center gap-1">
+                            <a href="mailto:{{ $contact->email }}?subject=Re: {{ rawurlencode($contact->subject) }}" class="btn btn-outline btn-sm w-full flex items-center justify-center gap-1 rounded-lg text-xs font-bold active:scale-[0.98] border-gray-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-2.25-1.5a2 2 0 00-2.22 0l-2.25 1.5" /></svg>
                                 Balas via Email
                             </a>

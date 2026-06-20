@@ -83,22 +83,22 @@
                                     @endif
 
                                     <!-- Verify Document Form -->
-                                    <form action="{{ route('admin.ppdb.documents.verify', $doc->id) }}" method="POST" class="flex flex-col sm:flex-row gap-2 items-end justify-between border-t border-gray-100 pt-3">
+                                    <form action="{{ route('admin.ppdb.documents.verify', $doc->id) }}" method="POST" class="flex flex-col sm:flex-row gap-3 items-end justify-between border-t border-gray-100 pt-3">
                                         @csrf
                                         @method('PUT')
                                         <div class="form-control w-full sm:w-1/3">
-                                            <label class="label py-1 text-xs text-gray-500">Tindakan</label>
-                                            <select name="verification_status" class="select select-bordered select-xs w-full focus:ring-primary focus:border-primary" required>
+                                            <label class="block text-gray-700 font-semibold mb-1 text-[11px]">Tindakan</label>
+                                            <select name="verification_status" class="select select-bordered select-xs w-full rounded-md text-xs border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                                 <option value="pending" {{ $doc->verification_status === 'pending' ? 'selected' : '' }}>Pending</option>
                                                 <option value="approved" {{ $doc->verification_status === 'approved' ? 'selected' : '' }}>Setujui (Approve)</option>
                                                 <option value="rejected" {{ $doc->verification_status === 'rejected' ? 'selected' : '' }}>Tolak (Reject)</option>
                                             </select>
                                         </div>
                                         <div class="form-control flex-grow w-full">
-                                            <label class="label py-1 text-xs text-gray-500">Catatan / Alasan (Opsional jika disetujui)</label>
-                                            <input type="text" name="verification_notes" value="{{ old('verification_notes', $doc->verification_notes) }}" placeholder="Contoh: Berkas buram / SKL tidak sah..." class="input input-bordered input-xs w-full focus:ring-primary" />
+                                            <label class="block text-gray-700 font-semibold mb-1 text-[11px]">Catatan / Alasan (Opsional)</label>
+                                            <input type="text" name="verification_notes" value="{{ old('verification_notes', $doc->verification_notes) }}" placeholder="Contoh: Berkas buram / SKL tidak sah..." class="input input-bordered input-xs w-full rounded-md text-xs border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                                         </div>
-                                        <button type="submit" class="btn btn-ghost btn-xs text-indigo-600 hover:text-indigo-900 border border-gray-200">Update Verifikasi</button>
+                                        <button type="submit" class="btn btn-ghost btn-xs text-indigo-600 hover:text-indigo-900 border border-gray-200 rounded-md font-semibold active:scale-[0.98]">Update</button>
                                     </form>
                                 </div>
                             @empty
@@ -146,8 +146,8 @@
                                 @method('PUT')
 
                                 <div class="form-control w-full">
-                                    <label class="label font-medium text-gray-700 text-sm">Ubah Status</label>
-                                    <select name="status" class="select select-bordered w-full focus:ring-primary focus:border-primary" required>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Ubah Status</label>
+                                    <select name="status" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" required>
                                         <option value="draft" {{ $registration->status === 'draft' ? 'selected' : '' }}>Draft</option>
                                         <option value="submitted" {{ $registration->status === 'submitted' ? 'selected' : '' }}>Submitted</option>
                                         <option value="under_review" {{ $registration->status === 'under_review' ? 'selected' : '' }}>Sedang Ditinjau (Under Review)</option>
@@ -159,11 +159,11 @@
                                 </div>
 
                                 <div class="form-control w-full">
-                                    <label class="label font-medium text-gray-700 text-sm">Catatan Internal / Pesan Kelulusan</label>
-                                    <textarea name="notes" placeholder="Tuliskan catatan tambahan (terlihat oleh pendaftar saat cek status kelulusan)..." class="textarea textarea-bordered w-full h-24 focus:ring-primary">{{ old('notes', $registration->notes) }}</textarea>
+                                    <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Catatan Internal / Pesan Kelulusan</label>
+                                    <textarea name="notes" placeholder="Tuliskan catatan tambahan (terlihat oleh pendaftar saat cek status kelulusan)..." class="textarea textarea-bordered w-full h-24 rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">{{ old('notes', $registration->notes) }}</textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary w-full text-white">Simpan Perubahan</button>
+                                <button type="submit" class="btn btn-primary w-full rounded-lg text-sm font-bold active:scale-[0.98]">Simpan Perubahan</button>
                             </form>
                         </div>
                     </div>

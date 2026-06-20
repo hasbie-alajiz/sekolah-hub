@@ -17,24 +17,24 @@
                     @csrf
 
                     <div class="form-control w-full">
-                        <label class="label font-medium text-gray-700">Nama Menu</label>
-                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Contoh: Menu Utama" class="input input-bordered w-full @error('name') input-error @enderror" required />
+                        <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nama Menu</label>
+                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Contoh: Menu Utama" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('name') input-error @enderror" required />
                         @error('name')
                             <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-control w-full">
-                        <label class="label font-medium text-gray-700">Slug (Opsional)</label>
-                        <input type="text" name="slug" value="{{ old('slug') }}" placeholder="slug-menu-otomatis" class="input input-bordered w-full text-sm" />
+                        <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Slug (Opsional)</label>
+                        <input type="text" name="slug" value="{{ old('slug') }}" placeholder="slug-menu-otomatis" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                         @error('slug')
                             <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-control w-full">
-                        <label class="label font-medium text-gray-700">Lokasi Tampilan (Opsional)</label>
-                        <select name="location" class="select select-bordered w-full text-sm">
+                        <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Lokasi Tampilan (Opsional)</label>
+                        <select name="location" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                             <option value="">Jangan Kaitkan ke Lokasi</option>
                             <option value="header-menu" {{ old('location') === 'header-menu' ? 'selected' : '' }}>Header Menu (Navigasi Atas)</option>
                             <option value="footer-menu" {{ old('location') === 'footer-menu' ? 'selected' : '' }}>Footer Menu (Navigasi Bawah)</option>
@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="flex gap-2 pt-4">
-                        <button type="submit" class="btn btn-primary flex-1">Simpan Menu</button>
-                        <a href="{{ route('admin.menus.index') }}" class="btn btn-ghost flex-1">Batal</a>
+                        <button type="submit" class="btn btn-primary flex-1 rounded-lg text-sm font-bold active:scale-[0.98]">Simpan Menu</button>
+                        <a href="{{ route('admin.menus.index') }}" class="btn btn-ghost flex-1 rounded-lg text-sm font-bold active:scale-[0.98] border border-gray-200">Batal</a>
                     </div>
                 </form>
             </div>

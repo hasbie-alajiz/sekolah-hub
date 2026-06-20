@@ -31,24 +31,24 @@
                 <div class="lg:col-span-2 space-y-6">
                     <div class="card bg-white shadow-sm border border-gray-100 p-6">
                         <div class="form-control w-full mb-4">
-                            <label class="label font-medium text-gray-700">Nama/Judul Album</label>
-                            <input type="text" name="title" value="{{ old('title') }}" placeholder="Ketik nama album galeri..." class="input input-bordered w-full @error('title') input-error @enderror" required />
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nama/Judul Album</label>
+                            <input type="text" name="title" value="{{ old('title') }}" placeholder="Ketik nama album galeri..." class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('title') input-error @enderror" required />
                             @error('title')
                                 <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-control w-full mb-4">
-                            <label class="label font-medium text-gray-700">Slug (Opsional)</label>
-                            <input type="text" name="slug" value="{{ old('slug') }}" placeholder="url-album-otomatis-jika-kosong" class="input input-bordered w-full text-sm" />
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Slug (Opsional)</label>
+                            <input type="text" name="slug" value="{{ old('slug') }}" placeholder="url-album-otomatis-jika-kosong" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                             @error('slug')
                                 <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-control w-full">
-                            <label class="label font-medium text-gray-700">Deskripsi Album</label>
-                            <textarea name="description" rows="5" placeholder="Keterangan singkat mengenai album kegiatan..." class="textarea textarea-bordered w-full text-sm">{{ old('description') }}</textarea>
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Deskripsi Album</label>
+                            <textarea name="description" rows="5" placeholder="Keterangan singkat mengenai album kegiatan..." class="textarea textarea-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                             @enderror
@@ -63,16 +63,16 @@
                         <h3 class="font-semibold text-gray-800 border-b border-gray-100 pb-3 mb-4">Publikasi</h3>
 
                         <div class="form-control w-full mb-6">
-                            <label class="label font-medium text-gray-700">Status</label>
-                            <select name="status" class="select select-bordered w-full">
+                            <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Status</label>
+                            <select name="status" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                 <option value="draft" {{ old('status') === 'draft' ? 'selected' : '' }}>Draft</option>
                                 <option value="published" {{ old('status') === 'published' ? 'selected' : '' }}>Diterbitkan</option>
                             </select>
                         </div>
 
                         <div class="flex gap-2">
-                            <button type="submit" class="btn btn-primary flex-1">Simpan Album</button>
-                            <a href="{{ route('admin.gallery.index') }}" class="btn btn-ghost">Batal</a>
+                            <button type="submit" class="btn btn-primary flex-1 rounded-lg text-sm font-bold active:scale-[0.98]">Simpan Album</button>
+                            <a href="{{ route('admin.gallery.index') }}" class="btn btn-ghost rounded-lg text-sm font-bold active:scale-[0.98] border border-gray-200">Batal</a>
                         </div>
                     </div>
 

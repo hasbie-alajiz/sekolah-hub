@@ -57,14 +57,14 @@
                                 <div class="collapse-title text-sm font-semibold text-gray-700">Link Kustom</div>
                                 <div class="collapse-content space-y-3">
                                     <div class="form-control">
-                                        <label class="label-text mb-1">Teks Link</label>
-                                        <input type="text" x-model="customLink.title" placeholder="Contoh: Beranda" class="input input-bordered input-sm text-sm" />
+                                        <label class="block text-gray-700 font-semibold mb-1 text-xs">Teks Link</label>
+                                        <input type="text" x-model="customLink.title" placeholder="Contoh: Beranda" class="input input-bordered input-sm w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                                     </div>
                                     <div class="form-control">
-                                        <label class="label-text mb-1">URL Link</label>
-                                        <input type="text" x-model="customLink.url" placeholder="Contoh: /hubungi-kami atau https://google.com" class="input input-bordered input-sm text-sm" />
+                                        <label class="block text-gray-700 font-semibold mb-1 text-xs">URL Link</label>
+                                        <input type="text" x-model="customLink.url" placeholder="Contoh: /hubungi-kami atau https://google.com" class="input input-bordered input-sm w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                                     </div>
-                                    <button type="button" @click="addCustomLink()" class="btn btn-primary btn-sm w-full">Tambahkan</button>
+                                    <button type="button" @click="addCustomLink()" class="btn btn-primary btn-sm w-full rounded-lg text-sm font-bold active:scale-[0.98]">Tambahkan</button>
                                 </div>
                             </div>
                             
@@ -82,7 +82,7 @@
                                         <div class="text-xs text-gray-400 italic">Tidak ada halaman publish.</div>
                                     @endforelse
                                     @if($pages->isNotEmpty())
-                                        <button type="button" @click="addCheckedItems('.page-checkbox', 'page')" class="btn btn-primary btn-sm w-full mt-2">Tambahkan</button>
+                                        <button type="button" @click="addCheckedItems('.page-checkbox', 'page')" class="btn btn-primary btn-sm w-full mt-2 rounded-lg text-sm font-bold active:scale-[0.98]">Tambahkan</button>
                                     @endif
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                                         <div class="text-xs text-gray-400 italic">Tidak ada berita publish.</div>
                                     @endforelse
                                     @if($posts->isNotEmpty())
-                                        <button type="button" @click="addCheckedItems('.post-checkbox', 'post')" class="btn btn-primary btn-sm w-full mt-2">Tambahkan</button>
+                                        <button type="button" @click="addCheckedItems('.post-checkbox', 'post')" class="btn btn-primary btn-sm w-full mt-2 rounded-lg text-sm font-bold active:scale-[0.98]">Tambahkan</button>
                                     @endif
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                         <div class="text-xs text-gray-400 italic">Tidak ada kategori.</div>
                                     @endforelse
                                     @if($categories->isNotEmpty())
-                                        <button type="button" @click="addCheckedItems('.category-checkbox', 'category')" class="btn btn-primary btn-sm w-full mt-2">Tambahkan</button>
+                                        <button type="button" @click="addCheckedItems('.category-checkbox', 'category')" class="btn btn-primary btn-sm w-full mt-2 rounded-lg text-sm font-bold active:scale-[0.98]">Tambahkan</button>
                                     @endif
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                     <h3 class="font-bold text-gray-800 text-base">Struktur Menu</h3>
                                     <p class="text-xs text-gray-400">Atur urutan, navigasi, dan tingkat menu (maksimal 3 tingkat).</p>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-sm">Simpan Struktur</button>
+                                <button type="submit" class="btn btn-primary btn-sm rounded-lg text-xs font-bold active:scale-[0.98]">Simpan Struktur</button>
                             </div>
 
                             <!-- List of Menu Items -->
@@ -198,18 +198,18 @@
 
                                         <!-- Edit Item Collapse Panel -->
                                         <div x-show="item.showEdit" class="p-3 bg-gray-50/50 border-t border-gray-100 space-y-3">
-                                            <div class="grid grid-cols-2 gap-2">
+                                            <div class="grid grid-cols-2 gap-3">
                                                 <div class="form-control">
-                                                    <label class="label-text mb-1">Label Navigasi</label>
-                                                    <input type="text" x-model="item.title" class="input input-bordered input-xs" />
+                                                    <label class="block text-gray-700 font-semibold mb-1 text-[11px]">Label Navigasi</label>
+                                                    <input type="text" x-model="item.title" class="input input-bordered input-xs w-full rounded-md text-xs border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                                                 </div>
                                                 <div class="form-control" x-show="item.type === 'custom'">
-                                                    <label class="label-text mb-1">URL</label>
-                                                    <input type="text" x-model="item.url" class="input input-bordered input-xs" />
+                                                    <label class="block text-gray-700 font-semibold mb-1 text-[11px]">URL</label>
+                                                    <input type="text" x-model="item.url" class="input input-bordered input-xs w-full rounded-md text-xs border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                                                 </div>
                                                 <div class="form-control">
-                                                    <label class="label-text mb-1">Target Link</label>
-                                                    <select x-model="item.target" class="select select-bordered select-xs">
+                                                    <label class="block text-gray-700 font-semibold mb-1 text-[11px]">Target Link</label>
+                                                    <select x-model="item.target" class="select select-bordered select-xs w-full rounded-md text-xs border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                                                         <option value="_self">Tab Aktif (_self)</option>
                                                         <option value="_blank">Tab Baru (_blank)</option>
                                                     </select>

@@ -17,24 +17,24 @@
                     @csrf
 
                     <div class="form-control w-full">
-                        <label class="label font-medium text-gray-700">Nama Kategori</label>
-                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Contoh: Pengumuman" class="input input-bordered w-full @error('name') input-error @enderror" required />
+                        <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Nama Kategori</label>
+                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Contoh: Pengumuman" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1 @error('name') input-error @enderror" required />
                         @error('name')
                             <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-control w-full">
-                        <label class="label font-medium text-gray-700">Slug (Opsional)</label>
-                        <input type="text" name="slug" value="{{ old('slug') }}" placeholder="slug-kategori-otomatis" class="input input-bordered w-full text-sm" />
+                        <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Slug (Opsional)</label>
+                        <input type="text" name="slug" value="{{ old('slug') }}" placeholder="slug-kategori-otomatis" class="input input-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1" />
                         @error('slug')
                             <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-control w-full">
-                        <label class="label font-medium text-gray-700">Parent Kategori</label>
-                        <select name="parent_id" class="select select-bordered w-full text-sm">
+                        <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Parent Kategori</label>
+                        <select name="parent_id" class="select select-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">
                             <option value="">Tanpa Parent (Kategori Utama)</option>
                             @foreach($parentCategories as $parent)
                                 <option value="{{ $parent->id }}" {{ old('parent_id') == $parent->id ? 'selected' : '' }}>
@@ -48,16 +48,16 @@
                     </div>
 
                     <div class="form-control w-full">
-                        <label class="label font-medium text-gray-700">Deskripsi</label>
-                        <textarea name="description" rows="3" placeholder="Deskripsi singkat kategori ini..." class="textarea textarea-bordered w-full text-sm">{{ old('description') }}</textarea>
+                        <label class="block text-gray-700 font-semibold mb-1.5 text-[13px]">Deskripsi</label>
+                        <textarea name="description" rows="3" placeholder="Deskripsi singkat kategori ini..." class="textarea textarea-bordered w-full rounded-lg text-sm border-gray-200 focus:ring-primary focus:border-primary focus:ring-1">{{ old('description') }}</textarea>
                         @error('description')
                             <span class="text-xs text-rose-600 mt-1">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="flex gap-2 pt-4">
-                        <button type="submit" class="btn btn-primary flex-1">Simpan Kategori</button>
-                        <a href="{{ route('admin.categories.index') }}" class="btn btn-ghost flex-1">Batal</a>
+                        <button type="submit" class="btn btn-primary flex-1 rounded-lg text-sm font-bold active:scale-[0.98]">Simpan Kategori</button>
+                        <a href="{{ route('admin.categories.index') }}" class="btn btn-ghost flex-1 rounded-lg text-sm font-bold active:scale-[0.98] border border-gray-200">Batal</a>
                     </div>
                 </form>
             </div>
